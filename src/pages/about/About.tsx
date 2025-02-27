@@ -8,16 +8,15 @@ const About = () => {
 		<div>
 			<h1>About</h1>
 			<p>This is the about page</p>
-      <Outlet />
 		</div>
 	);
 };
 
 // Define the metadata for this page
-About.pageMeta = {
-	title: "About Us | Vite + React + TS",
-	description: "Learn about our company and our mission",
-	keywords: "about us, company, mission, team"
-} as PageMeta;
+// About.pageMeta = {
+// 	title: "About Us | Vite + React + TS",
+// 	description: "Learn about our company and our mission",
+// 	keywords: "about us, company, mission, team"
+// } as PageMeta;
 
 export default About;

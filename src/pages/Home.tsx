@@ -32,10 +32,10 @@ const Home = () => {
 };
 
 // Define the metadata for this page
-Home.pageMeta = {
-	title: "Home Page | Vite + React + TS",
-	description: "Welcome to our Home page built with Vite, React, and TypeScript",
-	keywords: "vite, react, typescript, homepage"
-} as PageMeta;
+// Home.pageMeta = {
+// 	title: "Home Page | Vite + React + TS",
+// 	description: "Welcome to our Home page built with Vite, React, and TypeScript",
+// 	keywords: "vite, react, typescript, homepage"
+// } as PageMeta;
 
 export default Home;

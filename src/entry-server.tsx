@@ -1,19 +1,7 @@
 import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import App from "./App";
-import { StaticRouter, matchRoutes } from "react-router-dom";
-import { generateHeadContent, PageMeta, PageWithMeta } from "./utils/head";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-
-// Define routes for matching
-const routes = [
-	{ path: "/", element: <Home />, component: Home },
-	{ path: "/about", element: <About />, component: About },
-	{ path: "/about/*", element: <About />, component: About },
-	{ path: "/contact", element: <Contact />, component: Contact }
-];
+import { StaticRouter } from "react-router-dom";
 
 export function render(url: string) {
 	console.log('Server rendering URL:', url);
@@ -21,24 +9,6 @@ export function render(url: string) {
 	// Make sure we're processing the URL correctly
 	const cleanUrl = url.startsWith('/') ? url : `/${url}`;
 	console.log('cleanUrl :>> ', cleanUrl);
-	
-	// Find the matching route
-	const matches = matchRoutes(routes, cleanUrl);
-	
-	// Extract metadata from the matched route
-	let pageMeta: PageMeta = {
-		title: "Vite + React + TS + TailwindCSS"
-	};
-	
-	if (matches && matches.length > 0) {
-		const match = matches[matches.length - 1];
-		const component = match.route.component as unknown as PageWithMeta;
-		
-		if (component && component.pageMeta) {
-			pageMeta = {...pageMeta, ...component.pageMeta};
-		}
-	}
-	
 	const html = renderToString(
 		<StrictMode>
 			<StaticRouter location={cleanUrl}>
@@ -46,10 +16,9 @@ export function render(url: string) {
 			</StaticRouter>
 		</StrictMode>,
 	);
-	
-	// Return both html and head content based on the route's metadata
+	// Return both html and head (even though head might be empty in this example)
 	return { 
 		html,
-		head: generateHeadContent(pageMeta)
+		head: '<title>Vite + React + TS + TailwindCSS</title>' // You can extend this if you need to include meta tags or other head content
 	};
 }

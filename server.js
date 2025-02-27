@@ -33,35 +33,31 @@ if (!isProduction) {
 }
 
 // Serve HTML
-app.get('*', async (req, res) => {
+app.use('*all', async (req, res) => {
   try {
     const url = req.originalUrl.replace(base, '')
 
     /** @type {string} */
     let template
-    /** @type {import('./src/entry-server.ts').render} */
+    /** @type {import('./src/entry-server.tsx').render} */
     let render
     if (!isProduction) {
-      console.log('if :>> ');
       // Always read fresh template in development
       template = await fs.readFile('./index.html', 'utf-8')
       template = await vite.transformIndexHtml(url, template)
-      // console.log('vite template -- \n', template)
       render = (await vite.ssrLoadModule('/src/entry-server.tsx')).render
     } else {
-      console.log('else :>> ');
       template = templateHtml
-      // console.log('templateHtml -- \n', template)
-      render = (await import('./dist/server/entry-server.js')).render
+      render = (await import('./dist/server/entry-server.tsx')).render
     }
 
     const rendered = await render(url)
     console.log('rendered -- \n', rendered)
-    const html = template
-      .replace("<!--app-head-->", rendered.head ?? '')
-      .replace("<!--app-html-->", rendered.html ?? '')
 
-    // console.log('html -- \n', html)
+    const html = template
+      .replace(`<!--app-head-->`, rendered.head ?? '')
+      .replace(`<!--app-html-->`, rendered.html ?? '')
+
     res.status(200).set({ 'Content-Type': 'text/html' }).send(html)
   } catch (e) {
     vite?.ssrFixStacktrace(e)
