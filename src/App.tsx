@@ -4,17 +4,21 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import We from "./pages/about/we";
 import Team from "./pages/about/team";
+import BuildInfo from "./components/BuildInfo";
 
 function App() {
 	console.log("App");
 	return (
-		<Routes>
-			<Route path="/" element={<Home />} />
-			<Route path="/about" element={<About />} />
-			<Route path="/about/we" element={<We />} />
-			<Route path="/about/team" element={<Team />} />
-			<Route path="/contact" element={<Contact />} />
-		</Routes>
+		<>
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/about" element={<About />} />
+				<Route path="/about/we" element={<We />} />
+				<Route path="/about/team" element={<Team />} />
+				<Route path="/contact" element={<Contact />} />
+			</Routes>
+			<BuildInfo position="bottom-right" />
+		</>
 	);
 }
 

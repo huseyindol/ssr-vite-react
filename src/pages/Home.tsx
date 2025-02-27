@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import reactLogo from "../assets/react.svg";
-import { PageMeta } from "../utils/head";
+import { PageMeta, registerMetaForRoute } from "../utils/head";
+
+// Register metadata for this route
+registerMetaForRoute('/', {
+	title: "Home Page | Vite + React + TS",
+	description: "Welcome to our Home page built with Vite, React, and TypeScript",
+	keywords: "vite, react, typescript, homepage"
+});
 
 const Home = () => {
 	const [count, setCount] = useState(0);
@@ -31,11 +38,5 @@ const Home = () => {
 	);
 };
 
-// Define the metadata for this page
-// Home.pageMeta = {
-// 	title: "Home Page | Vite + React + TS",
-// 	description: "Welcome to our Home page built with Vite, React, and TypeScript",
-// 	keywords: "vite, react, typescript, homepage"
-// } as PageMeta;
 
 export default Home;
